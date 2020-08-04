@@ -532,14 +532,19 @@ function run() {
             core.info(github.event);
         
             core.setOutput('time', new Date().toTimeString())*/
-            if (github.context.eventName === 'push') {
-                const pushPayload = github.context.payload; // as Webhooks.WebhookPayloadPush;
-                core.info(`The head commit is: ${JSON.stringify(pushPayload)}`);
+            /*if (github.context.eventName === 'push') {
+              const pushPayload = github.context.payload; // as Webhooks.WebhookPayloadPush;
+              core.info(`The head commit is: ${JSON.stringify(pushPayload)}`);
+            } else {
+              core.info(`foobar: ${JSON.stringify(github.context.payload)}`);
+            };*/
+            const context = github.context.payload;
+            if (context.hasOwnProperty('pull_request')) {
+                core.info(`title: ${context.pull_request.title}`);
             }
             else {
-                core.info(`foobar: ${JSON.stringify(github.context.payload)}`);
+                core.info(`object: ${JSON.stringify(github)}`);
             }
-            ;
             core.setOutput('package', "test");
         }
         catch (error) {

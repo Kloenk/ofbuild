@@ -17,12 +17,18 @@ async function run(): Promise<void> {
 
     core.setOutput('time', new Date().toTimeString())*/
 
-    if (github.context.eventName === 'push') {
+    /*if (github.context.eventName === 'push') {
       const pushPayload = github.context.payload; // as Webhooks.WebhookPayloadPush;
       core.info(`The head commit is: ${JSON.stringify(pushPayload)}`);
     } else {
       core.info(`foobar: ${JSON.stringify(github.context.payload)}`);
-    };
+    };*/
+    const context = github.context.payload;
+    if (context.hasOwnProperty('pull_request')) {
+      core.info(`title: ${context.pull_request!.title}`);
+    } else {
+      core.info(`object: ${JSON.stringify(github)}`);
+    }
     core.setOutput('package', "test");
   } catch (error) {
     core.setFailed(error.message)
