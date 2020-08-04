@@ -534,10 +534,10 @@ function run() {
             core.setOutput('time', new Date().toTimeString())*/
             if (github.context.eventName === 'push') {
                 const pushPayload = github.context.payload; // as Webhooks.WebhookPayloadPush;
-                core.info(`The head commit is: ${pushPayload}`);
+                core.info(`The head commit is: ${JSON.stringify(pushPayload)}`);
             }
             else {
-                core.info(`foobar: ${github.context.payload}`);
+                core.info(`foobar: ${JSON.stringify(github.context.payload)}`);
             }
             ;
         }
