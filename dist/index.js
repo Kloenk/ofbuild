@@ -540,6 +540,7 @@ function run() {
                 core.info(`foobar: ${JSON.stringify(github.context.payload)}`);
             }
             ;
+            core.setOutput('package', "test");
         }
         catch (error) {
             core.setFailed(error.message);
