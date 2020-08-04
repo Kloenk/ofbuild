@@ -523,14 +523,15 @@ function run() {
         try {
             const packages = yield parse_title();
             core.setOutput('package', packages.join(", "));
-            const build = core.getInput("build");
-            for (var target in packages) {
-                core.startGroup(`OfBuild: build ${target}`);
+            const build = core.getInput("build") == "true";
+            for (var index in packages) {
+                core.startGroup(`OfBuild: build ${packages[index]}`);
                 if (build) {
-                    //await exec.exec('nix-build', ['.', '-A', target]);
+                    //await exec.exec('nix-build', ['.', '-A', packages[index]]);
+                    core.warning("build");
                 }
                 else {
-                    core.warning(`would run 'nix-build . -A ${target}'`);
+                    core.warning(`would run 'nix-build . -A ${packages[index]}'`);
                 }
                 core.endGroup();
             }
