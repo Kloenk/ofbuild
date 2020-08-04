@@ -538,18 +538,31 @@ function run() {
             } else {
               core.info(`foobar: ${JSON.stringify(github.context.payload)}`);
             };*/
-            const context = github.context.payload;
-            if (context.hasOwnProperty('pull_request')) {
-                core.info(`title: ${context.pull_request.title}`);
-            }
-            else {
-                core.info(`object: ${JSON.stringify(github)}`);
-            }
-            core.setOutput('package', "test");
+            const packages = yield parse_title();
+            core.setOutput('package', packages.join(", "));
         }
         catch (error) {
             core.setFailed(error.message);
         }
+    });
+}
+function parse_title() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const context = github.context.payload;
+        if (context.hasOwnProperty('pull_request')) {
+            const title = String(context.pull_request.title);
+            core.info(`title: ${context.pull_request.title}`);
+            var split = context.split(":", 2);
+            split = split[0].split(",");
+            core.info(`packages: ${split}`);
+            return split;
+        }
+        else {
+            //core.info(`object: ${JSON.stringify(github)}`);
+            core.warning(`not a pull request`);
+            return [];
+        }
+        return ["string"];
     });
 }
 run();
