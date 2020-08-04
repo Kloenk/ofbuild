@@ -38,7 +38,7 @@ async function parse_title(): Promise<Array<string>> {
 
       var split = title.split(":", 2);
       split = split[0].split(",");
-      core.info(`packages: ${split}`);
+      core.info(`packages: ${split.join(" + ")}`);
       return split;
     } else {
       //core.info(`object: ${JSON.stringify(github)}`);

@@ -554,7 +554,7 @@ function parse_title() {
             core.info(`title: ${context.pull_request.title}`);
             var split = title.split(":", 2);
             split = split[0].split(",");
-            core.info(`packages: ${split}`);
+            core.info(`packages: ${split.join(" + ")}`);
             return split;
         }
         else {
