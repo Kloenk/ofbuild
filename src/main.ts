@@ -12,8 +12,7 @@ async function run(): Promise<void> {
     for (var index in packages) {
       core.startGroup(`OfBuild: build ${packages[index]}`);
       if (build) {
-        //await exec.exec('nix-build', ['.', '-A', packages[index]]);
-	core.warning("build");
+        await exec.exec('nix-build', ['.', '-A', packages[index]]);
       } else {
 	core.warning(`would run 'nix-build . -A ${packages[index]}'`);
       }
