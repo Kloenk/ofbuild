@@ -12,7 +12,7 @@ async function run(): Promise<void> {
     for (var target in packages) {
       core.startGroup(`OfBuild: build ${target}`);
       if (build) {
-        await exec.exec('nix-build', ['.', '-A', target]);
+        //await exec.exec('nix-build', ['.', '-A', target]);
       } else {
 	core.warning(`would run 'nix-build . -A ${target}'`);
       }
