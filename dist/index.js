@@ -1434,8 +1434,8 @@ function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const packages = yield parse_title();
-            core.setOutput('package', packages.join(", "));
-            const build = core.getInput("build") == "true";
+            core.setOutput('package', packages.join(', '));
+            const build = core.getInput('build') == 'true';
             for (var index in packages) {
                 core.startGroup(`OfBuild: build ${packages[index]}`);
                 if (build) {
@@ -1458,9 +1458,9 @@ function parse_title() {
         if (context.hasOwnProperty('pull_request')) {
             const title = String(context.pull_request.title);
             core.debug(`title: ${context.pull_request.title}`);
-            var split = title.split(":", 2);
-            split = split[0].split(",");
-            core.debug(`packages: ${split.join(" + ")}`);
+            var split = title.split(':', 2);
+            split = split[0].split(',');
+            core.debug(`packages: ${split.join(' + ')}`);
             return split;
         }
         else {
@@ -1468,7 +1468,7 @@ function parse_title() {
             core.warning(`not a pull request`);
             return [];
         }
-        return ["string"];
+        return ['string'];
     });
 }
 run();
