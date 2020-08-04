@@ -552,7 +552,7 @@ function parse_title() {
         if (context.hasOwnProperty('pull_request')) {
             const title = String(context.pull_request.title);
             core.info(`title: ${context.pull_request.title}`);
-            var split = context.split(":", 2);
+            var split = title.split(":", 2);
             split = split[0].split(",");
             core.info(`packages: ${split}`);
             return split;

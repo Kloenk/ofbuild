@@ -36,7 +36,7 @@ async function parse_title(): Promise<Array<string>> {
       const title = String(context.pull_request!.title);
       core.info(`title: ${context.pull_request!.title}`);
 
-      var split = context.split(":", 2);
+      var split = title.split(":", 2);
       split = split[0].split(",");
       core.info(`packages: ${split}`);
       return split;
